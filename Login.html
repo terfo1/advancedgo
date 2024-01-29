@@ -50,6 +50,8 @@
         align-items: center;
     }
 
+
+
     .left h1 {
         text-align: center;
         color: #fff;
@@ -85,6 +87,8 @@
         }
     }
 
+
+
     .right form {
         width: 80%;
         height: 100%;
@@ -114,6 +118,9 @@
         color: #23a6d5;
     }
 
+
+
+
     form h1 {
         text-align: center;
     }
@@ -130,11 +137,15 @@
         height: 30px;
     }
 
-    form div h2 {
+    form h2 {
+        margin-top: 10px;
         font-size: 14px;
-        height: 7px;
-        margin-left: 10px;
-        font-weight: 300;
+        color: #887373;
+    }
+
+    form h2:hover{
+        text-decoration: underline;
+        cursor: pointer;
     }
 
     .button {
@@ -142,31 +153,14 @@
         color: #fff;
         transition: .2s all ease;
     }
-    a{
-        background-color: #7d5fb5;
-        color: #fff;
-        transition: .2s all ease;
-        font-size: 14px;
-        border-radius: 3px;
-        height: 25px;
-        margin-top: 10px;
-        text-align: center;
-        background-color: #7d5fb5;
-        color: #fff;
-        text-decoration: none;
-    }
-    a:hover {
-        transform: translateY(1px);
-        opacity: 90%;
-        cursor: pointer;
-    }
+
     .button:hover {
         transform: translateY(1px);
         opacity: 90%;
         cursor: pointer;
     }
     </style>
-    <title>User Registration</title>
+    <title>Login</title>
 </head>
 <body>
 <div class="wrapper">
@@ -175,20 +169,22 @@
             <img src="../static/img/logo.png" alt="" width="150px">
         </div>
         <div class="right">
-            <form  id="registrationForm" onsubmit="registerUser(event)">
-                <h1>Sign Up</h1>
-                <input type="text"  id="username"  name="username" placeholder="Username" required>
+            <form action="/register" method="post" onsubmit="loginUser(event)">
+                <h1>Login</h1>
+                <input type="text" name="username" placeholder="Username" id="username"required>
 
-                <input type="password" id="password" name="password" placeholder="Password" required>
-                <input type="password" placeholder="Confirm Password" required>
-                <input class="button" type="submit" value="Register">
-                <a href="login">Log in</a>
+                <input type="password" name="password" placeholder="Password" id="password"required>
+
+                <input class="button" type="submit" value="Login">
+                <h2>Create account</h2>
             </form>
         </div>
     </div>
 </div>
 <script>
-    function registerUser(event) {
+    console.log("Login button clicked");
+    function loginUser(event) {
+        console.log("Login button clicked");
         event.preventDefault();
 
         const username = document.getElementById("username").value;
@@ -198,7 +194,7 @@
             password: password
         };
 
-        fetch("/register", {
+        fetch("/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -208,12 +204,10 @@
             .then(response => {
                 console.log("Response Status:", response.status);
                 if (!response.ok) {
-                    throw new Error("Registration failed");
+                    throw new Error("Login failed");
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Response Data:", data);
+                console.log("Login successful");
+                window.location.href = "/edit_profile?username=" + encodeURIComponent(username);
             })
             .catch(error => {
                 console.error("Error:", error);
