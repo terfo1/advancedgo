@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchJobs();
+        });
+
+        function fetchJobs(page = 1) {
+            const name = document.getElementById('name').value;
+            const company = document.getElementById('company').value;
+            const sort = document.getElementById('sort').value;
+            const url = `http://localhost:8080/jobs?name=${encodeURIComponent(name)}&company=${encodeURIComponent(company)}&sort=${encodeURIComponent(sort)}&page=${page}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const listings = document.getElementById('listings');
+                    listings.innerHTML = ''; // Clear current listings
+                    data.forEach(job => {
+                        const jobElement = document.createElement('div');
+                        jobElement.innerHTML = `<h3>${job.name} at ${job.company}</h3><p>${job.description}</p><p>Added: ${job.added_date}</p>`;
+                        listings.appendChild(jobElement);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function submitForm(e) {
+            e.preventDefault(); // Prevent actual form submission
+            fetchJobs(); // Fetch jobs based on the current form values
+        }
+    </script>
+</head>
+<body>
+<h1>Job Listings</h1>
+<form onsubmit="submitForm(event)">
+    <label for="name">Job Name:</label>
+    <input type="text" id="name" name="name">
+    <label for="company">Company:</label>
+    <input type="text" id="company" name="company">
+    <label for="sort">Sort By:</label>
+    <select id="sort" name="sort">
+        <option value="name">Name</option>
+        <option value="company">Company</option>
+        <option value="added_date DESC">Newest First</option>
+        <option value="added_date ASC">Oldest First</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+<div id="listings">
+    <!-- Job listings will be displayed here -->
+</div>
+<!-- Simple Pagination (for demonstration, adjust as needed) -->
+<div>
+    <button onclick="fetchJobs(1)">1</button>
+    <button onclick="fetchJobs(2)">2</button>
+    <button onclick="fetchJobs(3)">3</button>
+    <!-- Add as many pages as needed or implement dynamic pagination -->
+</div>
+</body>
+</html>
