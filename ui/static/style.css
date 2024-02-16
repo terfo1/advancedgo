@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: border-box;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    -webkit-animation: gradientBG 10s ease infinite;
+    animation: gradientBG 10s ease infinite;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: aliceblue;
+    margin-top: 4%;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.box .left,
+.right {
+    width: 50%;
+}
+
+.left {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    -webkit-animation: gradientBG 10s ease infinite;
+    animation: gradientBG 10s ease infinite;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.left h1 {
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+@-webkit-keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.right form {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+form h1 {
+    color: #23a6d5;
+    text-align: center;
+}
+
+form input {
+    width: calc(100% - 10px); /* Adjusted the width calculation */
+    height: 25px;
+    margin-top: 15px;
+    outline: none;
+    padding: 0 5px;
+    border: none;
+    border-bottom: 1px solid #7d5fb5;
+    border-radius: 3px;
+    background-color: #f4f8f7;
+}
+
+form input::placeholder {
+    color: #23a6d5;
+}
+
+form .checkbox {
+    width: 20px;
+}
+
+form div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 30px;
+}
+
+form div h2 {
+    font-size: 14px;
+    margin-left: 10px;
+    font-weight: 300;
+}
+
+.button, a {
+    background-color: #7d5fb5;
+    color: #fff;
+    transition: .2s all ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:hover, a:hover {
+    transform: translateY(1px);
+    opacity: 90%;
+}
+
+a {
+    font-size: 14px;
+    border-radius: 3px;
+    height: 25px;
+    margin-top: 10px;
+    text-align: center;
+    line-height: 25px; /* Added for vertical alignment of text in a */
+}

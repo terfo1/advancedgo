@@ -48,7 +48,7 @@ func edit_Profile(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		logrus.Info("Username is:", username)
-		ts, err := template.ParseFiles("edit_profile.html")
+		ts, err := template.ParseFiles("ui/pages/edit_profile.html")
 		if err != nil {
 			logrus.Error(err.Error())
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -146,7 +146,7 @@ func getUsersHandler(w http.ResponseWriter, r *http.Request) {
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
-		ts, err := template.ParseFiles("Login.html")
+		ts, err := template.ParseFiles("ui/pages/Login.html")
 		if err != nil {
 			logrus.Error(err.Error())
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
